@@ -21,14 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-g(&92bh1je_kaub6^78tb12n4xcj1^9*pbkq+i9**^5hc57(9%)')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 # DEBUG = True
 # SECRET_KEY = 'django-insecure-g(&92bh1je_kaub6^78tb12n4xcj1^9*pbkq+i9**^5hc57(9%'
-SECRET_KEY = os.environ.get("SECRET_KEY")
 # ALLOWED_HOSTS = []
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Application definition
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_celery_beat',
     'social_django',
 
     'backend',
@@ -158,3 +158,8 @@ if not DEBUG:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CELERY_BROKER_URL = 'redis://red-co1djpun7f5s73dukmu0:6379'
+CELERY_RESULT_BACKEND = 'redis://red-co1djpun7f5s73dukmu0:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'

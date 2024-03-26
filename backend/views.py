@@ -9,13 +9,16 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.urls import reverse_lazy
 
+from backend.models import RandomNumber
+
 
 class Generator(ListView, LoginRequiredMixin):
     template_name = 'backend/generator.html'
     context_object_name = 'number'
 
     def get_queryset(self):
-        return random.randint(1, 100)
+        obj, created = RandomNumber.objects.get_or_create(id=1, defaults={'number': 0})
+        return obj.__str__()
 
 
 class UserLogin(LoginView):
