@@ -8,7 +8,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="{% static 'js/ajax_script.js' %}"></script>
     <style>
         body {
             height: 100vh;
@@ -18,14 +17,30 @@
             background-color: #cdeeff;
         }
     </style>
+    <script>
+        var socket = new WebSocket("ws://localhost:8000/ws/random_number/");
+
+
+        socket.onmessage = function (event) {
+            var data = JSON.parse(event.data);
+            document.getElementById('random_number').innerText = data.number;
+        };
+
+    </script>
 </head>
 <body>
 {% if request.user.is_authenticated %}
 <div class="justify-content-center">
-    <p>Случайное число: <span id="random_number">{{number}}</span></p>
+    <p>Случайное число:
+    <div id="random_number"></div>
+    </p>
     Current user: {{user}}
+
     <div class="d-flex justify-content-center align-items-center">
-        <a class="btn btn-secondary" href="{% url  'logout' %}" role="button">Выйти</a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="btn btn-secondary" type="submit">Выйти</button>
+        </form>
     </div>
 </div>
 {% else %}

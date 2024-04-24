@@ -17,8 +17,7 @@ class Generator(ListView, LoginRequiredMixin):
     context_object_name = 'number'
 
     def get_queryset(self):
-        obj, created = RandomNumber.objects.get_or_create(id=1, defaults={'number': 0})
-        return obj.__str__()
+        return None
 
 
 class UserLogin(LoginView):
