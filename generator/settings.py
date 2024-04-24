@@ -130,3 +130,13 @@ CELERY_RESULT_BACKEND = 'redis://red-co1djpun7f5s73dukmu0:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
+
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis://red-co1djpun7f5s73dukmu0", 6379)],
+        },
+    },
+}
