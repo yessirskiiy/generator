@@ -4,12 +4,12 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# DEBUG = True
-# SECRET_KEY = 'django-insecure-g(&92bh1je_kaub6^78tb12n4xcj1^9*pbkq+i9**^5hc57(9%'
-# ALLOWED_HOSTS = []
-DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
-SECRET_KEY = os.environ.get("SECRET_KEY")
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+DEBUG = True
+SECRET_KEY = 'django-insecure-g(&92bh1je_kaub6^78tb12n4xcj1^9*pbkq+i9**^5hc57(9%'
+ALLOWED_HOSTS = []
+# DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+# SECRET_KEY = os.environ.get("SECRET_KEY")
+# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
