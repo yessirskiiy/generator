@@ -4,12 +4,12 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = True
-SECRET_KEY = 'django-insecure-g(&92bh1je_kaub6^78tb12n4xcj1^9*pbkq+i9**^5hc57(9%'
-ALLOWED_HOSTS = []
-# DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
-# SECRET_KEY = os.environ.get("SECRET_KEY")
-# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+# DEBUG = True
+# SECRET_KEY = 'django-insecure-g(&92bh1je_kaub6^78tb12n4xcj1^9*pbkq+i9**^5hc57(9%'
+# ALLOWED_HOSTS = []
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+SECRET_KEY = os.environ.get("SECRET_KEY")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -70,8 +70,8 @@ DATABASES = {
     }
 }
 
-# database_url = os.environ.get("DATABASE_URL")
-DATABASES['default'] = dj_database_url.parse('postgres://number_generator_app_user:DRwua5a5GqE6Uq9NXGKciRoWBNWTg1jI@dpg-co18e6ocmk4c73b8k3k0-a.frankfurt-postgres.render.com/number_generator_app')
+database_url = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 # postgres://number_generator_app_user:DRwua5a5GqE6Uq9NXGKciRoWBNWTg1jI@dpg-co18e6ocmk4c73b8k3k0-a.frankfurt-postgres.render.com/number_generator_app
 
@@ -125,8 +125,8 @@ if not DEBUG:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+CELERY_BROKER_URL = 'redis://red-co1djpun7f5s73dukmu0:6379'
+CELERY_RESULT_BACKEND = 'redis://red-co1djpun7f5s73dukmu0:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
