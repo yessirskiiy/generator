@@ -1,3 +1,4 @@
-web: daphne --port 10000 --bind 0.0.0.0 generator.asgi:application
-worker: celery --app=generator worker -l INFO
-beat: celery -A generator beat
+release: python manage.py migrate
+web: daphne generator.asgi:application --port $PORT --bind 0.0.0.0 -v2
+celery: celery --app=generator worker -l INFO
+celerybeat: celery -A generator beat
