@@ -18,8 +18,10 @@
         }
     </style>
     <script>
-        var socket = new WebSocket("ws://localhost:8000/ws/random_number/");
-
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var socket = new WebSocket(
+            ws_scheme + '://' + window.location.host + '/ws/random_number/'
+        )
 
         socket.onmessage = function (event) {
             var data = JSON.parse(event.data);
