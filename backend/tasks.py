@@ -1,11 +1,17 @@
+import requests
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 from celery import shared_task
-import random
-from .models import RandomNumber
+
+channel_layer = get_channel_layer()
 
 
 @shared_task
-def generate_number():
-    number = random.randint(1, 100)
-    obj, created = RandomNumber.objects.update_or_create(
-        defaults={'number': number}
-    )
+def get_number():
+    url = 'http://127.0.0.1:8000/api/random/'
+    response = requests.get(url)
+    number = response.json()['random_number']
+
+    async_to_sync(channel_layer.group_send)('random_number', {'type': 'send_number', 'text': number})
+
+    return number

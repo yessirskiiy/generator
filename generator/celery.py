@@ -9,7 +9,7 @@ celery_app.autodiscover_tasks()
 
 celery_app.conf.beat_schedule = {
     'add-every-5-seconds': {
-        'task': 'backend.tasks.generate_number',
+        'task': 'backend.tasks.get_number',
         'schedule': 5.0
     },
 }

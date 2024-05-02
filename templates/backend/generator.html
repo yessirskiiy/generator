@@ -22,9 +22,9 @@
 
 
         socket.onmessage = function (event) {
-            var data = JSON.parse(event.data);
-            document.getElementById('random_number').innerText = data.number;
-        };
+            var number = event.data;
+            document.querySelector('#random_number').innerText = number;
+        }
 
     </script>
 </head>
