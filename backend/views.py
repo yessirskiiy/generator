@@ -1,5 +1,6 @@
 import random
 
+from django.http import JsonResponse
 from django.views.generic import ListView, FormView
 
 from django.contrib.auth import login
@@ -10,6 +11,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
 from backend.models import RandomNumber
+
+
+def random_number_api(request):
+    random_number = random.randint(1, 100)
+    data = {
+        'random_number': random_number
+    }
+    return JsonResponse(data)
 
 
 class Generator(ListView, LoginRequiredMixin):
