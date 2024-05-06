@@ -69,7 +69,7 @@ DATABASES = {
     }
 }
 
-# database_url = os.environ.get("DATABASE_URL")
+database_url = os.environ.get("DATABASE_URL")
 
 # postgres://number_generator_app_user:DRwua5a5GqE6Uq9NXGKciRoWBNWTg1jI@dpg-co18e6ocmk4c73b8k3k0-a.frankfurt-postgres.render.com/number_generator_app
 
@@ -98,6 +98,7 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_GITHUB_KEY = '29018b7237249df6d9fe'
 SOCIAL_AUTH_GITHUB_SECRET = '15d8c8a8c424aa76b9fb145e5d5fa64b660fec9b'
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 LOGIN_URL = '/auth/login/github-oauth2/'
 
@@ -132,7 +133,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [(os.environ['REDIS_URL'], 6379)],
+            "hosts": [os.environ.get("REDIS_URL")],
         },
     }
 }
@@ -140,8 +141,8 @@ CHANNEL_LAYERS = {
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-CELERY_BROKER_URL = os.environ['REDIS_URL']
-CELERY_RESULT_BACKEND = os.environ['REDIS_URL']
+CELERY_BROKER_URL = os.environ.get('REDIS_URL')
+CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL')
 # CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 # CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
