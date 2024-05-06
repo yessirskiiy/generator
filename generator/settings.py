@@ -71,7 +71,7 @@ DATABASES = {
     }
 }
 
-database_url = os.environ.get("DATABASE_URL")
+# database_url = os.environ.get("DATABASE_URL")
 
 # postgres://number_generator_app_user:DRwua5a5GqE6Uq9NXGKciRoWBNWTg1jI@dpg-co18e6ocmk4c73b8k3k0-a.frankfurt-postgres.render.com/number_generator_app
 
